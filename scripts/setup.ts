@@ -13,7 +13,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const ROOT_DIR = join(__dirname, "..");
-const ENV_EXAMPLE = join(ROOT_DIR, "env.example");
+const ENV_EXAMPLE = join(ROOT_DIR, ".env.example");
 const ENV_FILE = join(ROOT_DIR, ".env");
 
 // ANSI colors
@@ -97,13 +97,13 @@ function copyEnvFile(): boolean {
   }
 
   if (!existsSync(ENV_EXAMPLE)) {
-    error("env.example file not found");
+    error(".env.example file not found");
     return false;
   }
 
   try {
     copyFileSync(ENV_EXAMPLE, ENV_FILE);
-    success("Created .env file from env.example");
+    success("Created .env file from .env.example");
     return true;
   } catch (err) {
     error(`Failed to create .env file: ${err}`);
@@ -122,8 +122,12 @@ function checkEnvVariables(): EnvStatus {
   const optional = [
     "GOOGLE_CLIENT_ID",
     "GOOGLE_CLIENT_SECRET",
-    "OPENROUTER_API_KEY",
-    "OPENROUTER_MODEL",
+    "OPENAI_API_KEY",
+    "OPENAI_MODEL",
+    "FLIGHT_PROVIDER",
+    "DUFFEL_ACCESS_TOKEN",
+    "GOOGLE_PLACES_API_KEY",
+    "CRON_SECRET",
     "BLOB_READ_WRITE_TOKEN",
     "NEXT_PUBLIC_APP_URL",
   ];
@@ -205,8 +209,8 @@ function printNextSteps(envStatus: EnvStatus) {
     steps.push("Set up Google OAuth at https://console.cloud.google.com/");
   }
 
-  if (envStatus.optional.includes("OPENROUTER_API_KEY")) {
-    steps.push("Get an OpenRouter API key at https://openrouter.ai/settings/keys");
+  if (envStatus.optional.includes("OPENAI_API_KEY")) {
+    steps.push("Get an OpenAI API key at https://platform.openai.com/api-keys");
   }
 
   steps.push("Start the development server: pnpm dev");
