@@ -34,7 +34,7 @@ npx create-agentic-app@latest .
 Then configure and run the app:
 
 ```bash
-cp env.example .env
+cp .env.example .env
 docker compose up -d
 pnpm db:migrate
 pnpm dev
@@ -75,7 +75,7 @@ Claude will run the skill end-to-end and ask you the few decisions it actually n
 
 ## Environment Variables
 
-Start from `env.example` and update values for your environment:
+Start from `.env.example` and update values for your environment:
 
 ```env
 # Database
@@ -249,7 +249,7 @@ Important root files:
 - `DESIGN.md`: UI design system and component guidance
 - `drizzle.config.ts`: Drizzle migration configuration
 - `docker-compose.yml`: local PostgreSQL service
-- `env.example`: environment variable template
+- `.env.example`: environment variable template
 - `components.json`: shadcn/ui configuration
 
 ## Available Scripts
